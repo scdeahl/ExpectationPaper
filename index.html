@@ -38,8 +38,9 @@
     .mountain {
       flex: 1;
       position: relative;
-      background: url('mountain.png') no-repeat center center/cover;
+      background: url('mountain.png') no-repeat center center/contain;
       background-color: #eaeaea;
+      height: 100vh;
     }
     .overlay-link {
       position: absolute;
@@ -57,14 +58,14 @@
       background-color: yellow;
     }
 
-    /* Adjusted positions */
-    #link-i { top: 70%; left: 30%; }
-    #link-we { top: 45%; left: 40%; }
-    #link-it { top: 30%; left: 45%; }
-    #link-goal { top: 5%; left: 60%; }
-    #link-reality { top: 90%; left: 18%; }
-    #link-options { top: 60%; left: 40%; }
-    #link-will { top: 15%; left: 45%; }
+    /* Approximate initial positions — tweak these to match your image layout */
+    #link-i        { top: 70%; left: 30%; }
+    #link-we       { top: 55%; left: 38%; }
+    #link-it       { top: 40%; left: 48%; }
+    #link-goal     { top: 10%; left: 58%; }
+    #link-reality  { top: 85%; left: 20%; }
+    #link-options  { top: 60%; left: 42%; }
+    #link-will     { top: 25%; left: 46%; }
 
     .textbox {
       max-width: 800px;
@@ -103,47 +104,4 @@
     </div>
   </section>
 
-  <section id="we" class="section">
-    <div class="textbox">
-      <h2>We – Team Collaboration</h2>
-      <p>TEXTBOX</p>
-    </div>
-  </section>
-
-  <section id="it" class="section">
-    <div class="textbox">
-      <h2>It – Project Outcome</h2>
-      <p>TEXTBOX</p>
-    </div>
-  </section>
-
-  <section id="goal" class="section">
-    <div class="textbox">
-      <h2>G – Goal</h2>
-      <p>TEXTBOX</p>
-    </div>
-  </section>
-
-  <section id="reality" class="section">
-    <div class="textbox">
-      <h2>R – Reality</h2>
-      <p>TEXTBOX</p>
-    </div>
-  </section>
-
-  <section id="options" class="section">
-    <div class="textbox">
-      <h2>O – Options</h2>
-      <p>TEXTBOX</p>
-    </div>
-  </section>
-
-  <section id="will" class="section">
-    <div class="textbox">
-      <h2>W – Will</h2>
-      <p>TEXTBOX</p>
-    </div>
-  </section>
-
-</body>
-</html>
+  <section id="we"
