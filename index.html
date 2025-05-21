@@ -35,11 +35,24 @@
       font-weight: normal;
       font-size: 1.1rem;
     }
-    .mountain {
+    .image-container {
       flex: 1;
-      position: relative;
-      background: url('mountain.png') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: #eaeaea;
+      overflow: hidden;
+    }
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 1 / 1;
+    }
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
     .overlay-link {
       position: absolute;
@@ -57,14 +70,14 @@
       background-color: yellow;
     }
 
-    /* Adjusted positions */
-    #link-i { top: 70%; left: 30%; }
-    #link-we { top: 51%; left: 38%; }
-    #link-it { top: 34%; left: 48%; }
-    #link-goal { top: 5%; left: 57%; }
-    #link-reality { top: 100%; left: 20%; }
-    #link-options { top: 60%; left: 40%; }
-    #link-will { top: 9%; left: 30%; }
+    /* Label positions relative to image */
+    #link-i { top: 61.2%; left: 25%; }
+    #link-we { top: 29%; left: 40%; }
+    #link-it { top: 17%; left: 40%; }
+    #link-goal { top: 5%; left: 59%; }
+    #link-reality { top: 90%; left: 20%; }
+    #link-obstacles { top: 76%; left: 47.0%; }
+    #link-wayforward { top: 47%; left: 33%; }
 
     .textbox {
       max-width: 800px;
@@ -84,14 +97,17 @@
       <h1>Growth Journey Explained</h1>
       <p>TEXTBOX</p>
     </div>
-    <div class="mountain">
-      <a href="#i" id="link-i" class="overlay-link">I</a>
-      <a href="#we" id="link-we" class="overlay-link">We</a>
-      <a href="#it" id="link-it" class="overlay-link">It</a>
-      <a href="#goal" id="link-goal" class="overlay-link">Goals</a>
-      <a href="#reality" id="link-reality" class="overlay-link">Reality</a>
-      <a href="#options" id="link-options" class="overlay-link">Options</a>
-      <a href="#will" id="link-will" class="overlay-link">Will</a>
+    <div class="image-container">
+      <div class="image-wrapper">
+        <img src="mountain.png" alt="Growth Journey Mountain">
+        <a href="#i" id="link-i" class="overlay-link">I</a>
+        <a href="#we" id="link-we" class="overlay-link">We</a>
+        <a href="#it" id="link-it" class="overlay-link">It</a>
+        <a href="#goal" id="link-goal" class="overlay-link">Goals</a>
+        <a href="#reality" id="link-reality" class="overlay-link">Reality</a>
+        <a href="#obstacles" id="link-obstacles" class="overlay-link">Obstacles</a>
+        <a href="#wayforward" id="link-wayforward" class="overlay-link">Way Forward</a>
+      </div>
     </div>
   </section>
 
@@ -131,20 +147,19 @@
     </div>
   </section>
 
-  <section id="options" class="section">
+  <section id="obstacles" class="section">
     <div class="textbox">
-      <h2>O – Options</h2>
+      <h2>O – Obstacles</h2>
       <p>TEXTBOX</p>
     </div>
   </section>
 
-  <section id="will" class="section">
+  <section id="wayforward" class="section">
     <div class="textbox">
-      <h2>W – Will</h2>
+      <h2>W – Way Forward</h2>
       <p>TEXTBOX</p>
     </div>
   </section>
 
 </body>
 </html>
-
