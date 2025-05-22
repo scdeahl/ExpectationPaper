@@ -1,3 +1,4 @@
+<!-- tracker.html -->
 <div class="textbox">
   <button type="button" onclick="document.getElementById('overlay').style.display='none'" 
           style="position: absolute; top: 10px; right: 100px; background-color: white; border: 2px solid black; padding: 5px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">
@@ -33,33 +34,3 @@
     Thank you! Your feedback has been sent. 😊
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('tracker-form');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault(); // prevent page reload
-
-      const formData = new FormData(form);
-
-      fetch('https://formspree.io/f/mldbkwdv', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          form.style.display = 'none';
-          document.getElementById('thank-you').style.display = 'block';
-        } else {
-          alert('Form could not be sent. Please check Formspree setup.');
-        }
-      })
-      .catch(error => {
-        alert('Network error. Please try again later.');
-      });
-    });
-  });
-</script>
