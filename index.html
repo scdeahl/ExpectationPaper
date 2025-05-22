@@ -90,7 +90,24 @@
     #link-obstacles { top: 76%; left: 47.0%; }
     #link-wayforward { top: 47%; left: 33%; }
 
-    /* Overlay styles */
+    #tracker-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+      background-color: rgba(255,255,255,0.7);
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    #tracker-button:hover {
+      background-color: yellow;
+    }
+
     #overlay {
       position: fixed;
       top: 0;
@@ -132,24 +149,6 @@
     #overlay-content button:hover {
       background-color: yellow;
     }
-
-    #tracker-button {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 1000;
-      background-color: rgba(255,255,255,0.7);
-      padding: 5px 10px;
-      border-radius: 5px;
-      color: black;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-
-    #tracker-button:hover {
-      background-color: yellow;
-    }
   </style>
 </head>
 <body>
@@ -157,13 +156,12 @@
   <!-- SPLIT SCREEN INTRO -->
   <section class="split-screen">
     <div class="left-text">
-      <h1>Expectation 'paper'</h1>
-     <p>Welcome to this website—rather than writing a paper, I chose to create a website for a few reasons.</p>
-     <p>First, I wanted to visualise my learning journey. The GROW and I-WE-IT frameworks inspired me, and I combined them into one path. I used the order Reality, Obstacles, I, Way Forward, We, It, and Goals because it reflects how I learn: starting from what is, facing challenges, reflecting, taking action, and involving others—always with goals in mind. I drew a mountain in Photoshop to show this path. By clicking on the steps, you can explore each part.</p>
-     <p>Second, the website lets me integrate feedback and track progress. In the bottom left corner, there’s a button called ‘Help me track progress’ where teammates from the Expert Team, the MT Team, and others can give feedback. I’ll connect this to a live results section next week. I’ll also share it during our Monday meeting.</p>
-     <p>Finally, this was a chance to use and improve my web development skills. I built the site using HTML and Visual Studio Code with Live Preview. I used ChatGPT to speed up coding and host everything on GitHub.</p>
-     <p>I hope this gives a clear and engaging view of my journey.</p>
-
+      <h1>Growth Journey Explained</h1>
+      <p>Welcome to this website.</p>
+      <p>I created it because I’m a very visual person, and I wanted to approach this serious assignment in a playful and engaging way. Designing a website gave me the freedom to shape the story creatively and make the process of reflection feel more alive.</p>
+      <p>I chose the mountain as a metaphor because personal growth is a journey. The mountain helps me visualise that path: where I begin, what I face along the way, and what I’m reaching for.</p>
+      <p>The order of the steps follows the logic of real change. I start with Reality, because I need to know where I stand. Then I face the Obstacles that make progress difficult. From there, I reflect on I — what’s going on inside me and what I want to change. That leads to a Way Forward with practical steps. Once that’s in place, I can shift focus to WE — how I contribute to the team — and together we build the IT, our shared result. At the top are my Goals, the bigger picture I’m climbing toward. This structure helps me show how growth moves from self-awareness to shared outcomes, step by step.</p>
+      <p>Click on the words in the mountain to explore the steps of my journey.</p>   
     </div>
     <div class="image-container">
       <div class="image-wrapper">
@@ -179,7 +177,7 @@
     </div>
   </section>
 
-  <!-- MAIN OVERLAY -->
+  <!-- OVERLAY -->
   <div id="overlay">
     <div id="overlay-content">
       <button onclick="closeOverlay()">Close</button>
@@ -199,7 +197,7 @@
           const tempDiv = document.createElement('div');
           tempDiv.innerHTML = html;
           const content = tempDiv.querySelector('.textbox');
-          document.getElementById('overlay-text').innerHTML = content ? content.innerHTML : 'Content not found.';
+          document.getElementById('overlay-text').innerHTML = content ? content.outerHTML : 'Content not found.';
           document.getElementById('overlay').style.display = 'flex';
         });
     }
@@ -207,6 +205,35 @@
     function closeOverlay() {
       document.getElementById('overlay').style.display = 'none';
     }
+
+    // Tracker form handler (executed from index.html)
+    document.addEventListener('click', function () {
+      setTimeout(() => {
+        const form = document.getElementById('tracker-form');
+        if (form && !form.dataset.bound) {
+          form.dataset.bound = true;
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch('https://formspree.io/f/mldbkwdv', {
+              method: 'POST',
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+              if (response.ok) {
+                form.style.display = 'none';
+                const thankYou = document.getElementById('thank-you');
+                if (thankYou) thankYou.style.display = 'block';
+              } else {
+                alert('Form could not be sent. Please check Formspree setup.');
+              }
+            })
+            .catch(() => alert('Network error. Please try again later.'));
+          });
+        }
+      }, 200);
+    });
   </script>
 
 </body>
