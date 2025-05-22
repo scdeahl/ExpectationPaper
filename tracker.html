@@ -13,11 +13,6 @@
     </div>
 
     <div style="margin-bottom: 20px;">
-      <label for="date"><strong>Date</strong></label><br />
-      <input type="date" name="date" id="date" required style="width: 100%; padding: 8px; margin-top: 4px;">
-    </div>
-
-    <div style="margin-bottom: 20px;">
       <label><strong>Not interrupting</strong></label><br />
       <input type="range" min="1" max="10" name="interrupting" value="5" class="slider"
              oninput="document.getElementById('value-interrupting').textContent = 'Score: ' + this.value;">
@@ -43,7 +38,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('tracker-form');
     form.addEventListener('submit', function (e) {
-      e.preventDefault(); // prevent default form submission
+      e.preventDefault(); // prevent page reload
 
       const formData = new FormData(form);
 
@@ -59,7 +54,7 @@
           form.style.display = 'none';
           document.getElementById('thank-you').style.display = 'block';
         } else {
-          alert('Form could not be sent. Check your Formspree setup.');
+          alert('Form could not be sent. Please check Formspree setup.');
         }
       })
       .catch(error => {
