@@ -6,7 +6,7 @@
 
   <h2>How did Sophie do this week?</h2>
 
-  <form action="https://formspree.io/f/mnqekpbl" method="POST">
+  <form id="tracker-form" style="margin-bottom: 20px;">
     <div style="margin-bottom: 20px;">
       <label for="name"><strong>Your name</strong></label><br />
       <input type="text" name="name" id="name" required style="width: 100%; padding: 8px; margin-top: 4px;">
@@ -33,4 +33,38 @@
 
     <button type="submit" style="padding: 10px 20px; font-weight: bold;">Submit</button>
   </form>
+
+  <div id="thank-you" style="display: none; font-weight: bold; font-size: 1.2rem;">
+    Thank you! Your feedback has been sent. 😊
+  </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('tracker-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch('https://formspree.io/f/mnqekpbl', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById('thank-you').style.display = 'block';
+        } else {
+          alert('There was a problem sending the form. Please try again.');
+        }
+      })
+      .catch(error => {
+        alert('Network error. Please try again later.');
+      });
+    });
+  });
+</script>
