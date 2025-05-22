@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Growth Journey</title>
   <style>
     body {
@@ -10,15 +10,18 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
     }
+
     .section {
       padding: 60px 20px;
       text-align: center;
     }
+
     .split-screen {
       display: flex;
       flex-wrap: wrap;
       min-height: 100vh;
     }
+
     .left-text {
       flex: 1;
       padding: 60px;
@@ -27,14 +30,17 @@
       justify-content: center;
       background-color: #f5f5f5;
     }
+
     .left-text h1 {
       font-weight: bold;
       margin-bottom: 20px;
     }
+
     .left-text p {
       font-weight: normal;
       font-size: 1.1rem;
     }
+
     .image-container {
       flex: 1;
       display: flex;
@@ -44,12 +50,14 @@
       overflow: hidden;
       padding: 20px;
     }
+
     .image-wrapper {
       position: relative;
       width: 100%;
       max-width: 800px;
       aspect-ratio: 1 / 1;
     }
+
     .image-wrapper img {
       width: 100%;
       height: auto;
@@ -57,6 +65,7 @@
       object-fit: contain;
       display: block;
     }
+
     .overlay-link {
       position: absolute;
       background-color: rgba(255,255,255,0.7);
@@ -65,10 +74,10 @@
       cursor: pointer;
       color: black;
       font-weight: bold;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-decoration: none;
       transition: background-color 0.3s;
     }
+
     .overlay-link:hover {
       background-color: yellow;
     }
@@ -81,13 +90,47 @@
     #link-obstacles { top: 76%; left: 47.0%; }
     #link-wayforward { top: 47%; left: 33%; }
 
-    .textbox {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: white;
+    /* Overlay styles */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    #overlay-content {
+      background-color: rgba(255, 255, 255, 0.95);
       padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      font-size: 1.1rem;
+    }
+
+    #overlay-content button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: white;
+      border: 2px solid black;
+      padding: 5px 15px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #overlay-content button:hover {
+      background-color: yellow;
     }
   </style>
 </head>
@@ -106,16 +149,43 @@
     <div class="image-container">
       <div class="image-wrapper">
         <img src="mountain.png" alt="Growth Journey Mountain">
-        <a href="i.html" id="link-i" class="overlay-link">I</a>
-        <a href="we.html" id="link-we" class="overlay-link">We</a>
-        <a href="it.html" id="link-it" class="overlay-link">It</a>
-        <a href="goal.html" id="link-goal" class="overlay-link">Goals</a>
-        <a href="reality.html" id="link-reality" class="overlay-link">Reality</a>
-        <a href="obstacles.html" id="link-obstacles" class="overlay-link">Obstacles</a>
-        <a href="wayforward.html" id="link-wayforward" class="overlay-link">Way Forward</a>
+        <a href="#" onclick="openOverlay('reality.html')" id="link-reality" class="overlay-link">Reality</a>
+        <a href="#" onclick="openOverlay('obstacles.html')" id="link-obstacles" class="overlay-link">Obstacles</a>
+        <a href="#" onclick="openOverlay('i.html')" id="link-i" class="overlay-link">I</a>
+        <a href="#" onclick="openOverlay('wayforward.html')" id="link-wayforward" class="overlay-link">Way Forward</a>
+        <a href="#" onclick="openOverlay('we.html')" id="link-we" class="overlay-link">We</a>
+        <a href="#" onclick="openOverlay('it.html')" id="link-it" class="overlay-link">It</a>
+        <a href="#" onclick="openOverlay('goal.html')" id="link-goal" class="overlay-link">Goals</a>
       </div>
     </div>
   </section>
+
+  <!-- OVERLAY -->
+  <div id="overlay">
+    <div id="overlay-content">
+      <button onclick="closeOverlay()">Close</button>
+      <div id="overlay-text"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    function openOverlay(file) {
+      fetch(file)
+        .then(response => response.text())
+        .then(html => {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          const content = tempDiv.querySelector('.textbox');
+          document.getElementById('overlay-text').innerHTML = content ? content.innerHTML : 'Content not found.';
+          document.getElementById('overlay').style.display = 'flex';
+        });
+    }
+
+    function closeOverlay() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>
