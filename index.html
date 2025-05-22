@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Expectation paper</title>
+  <title>Personal Growth Journey</title>
   <style>
     body {
       margin: 0;
@@ -153,7 +153,6 @@
 </head>
 <body>
 
-  <!-- SPLIT SCREEN INTRO -->
   <section class="split-screen">
     <div class="left-text">
       <h1>Growth Journey Explained</h1>
@@ -177,7 +176,7 @@
     </div>
   </section>
 
-  <!-- OVERLAY -->
+  <!-- Overlay -->
   <div id="overlay">
     <div id="overlay-content">
       <button onclick="closeOverlay()">Close</button>
@@ -185,10 +184,10 @@
     </div>
   </div>
 
-  <!-- TRACKER BUTTON -->
+  <!-- Tracker Button -->
   <a href="#" onclick="openOverlay('tracker.html')" id="tracker-button">Help me track progress</a>
 
-  <!-- SCRIPT -->
+  <!-- Scripts -->
   <script>
     function openOverlay(file) {
       fetch(file)
@@ -206,7 +205,7 @@
       document.getElementById('overlay').style.display = 'none';
     }
 
-    // Tracker form handler (executed from index.html)
+    // Attach tracker form logic once the form appears in the DOM
     document.addEventListener('click', function () {
       setTimeout(() => {
         const form = document.getElementById('tracker-form');
@@ -235,35 +234,6 @@
       }, 200);
     });
   </script>
-<script>
-  document.addEventListener('click', function () {
-    setTimeout(() => {
-      const form = document.getElementById('tracker-form');
-      if (form && !form.dataset.bound) {
-        form.dataset.bound = true;
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          const formData = new FormData(form);
-          fetch('https://formspree.io/f/mldbkwdv', {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-          })
-          .then(response => {
-            if (response.ok) {
-              form.style.display = 'none';
-              const thankYou = document.getElementById('thank-you');
-              if (thankYou) thankYou.style.display = 'block';
-            } else {
-              alert('Form could not be sent. Please check Formspree setup.');
-            }
-          })
-          .catch(() => alert('Network error. Please try again later.'));
-        });
-      }
-    }, 200);
-  });
-</script>
 
 </body>
 </html>
