@@ -82,16 +82,16 @@
       background-color: yellow;
     }
 
-    #link-i { top: 61.2%; left: 27.1%; }
-    #link-we { top: 32.5%; left: 59.0%; }
+    #link-i { top: 61.2%; left: 25%; }
+    #link-we { top: 29%; left: 40%; }
     #link-it { top: 17%; left: 40%; }
     #link-goal { top: 5%; left: 59%; }
-    #link-reality { top: 90%; left: 25%; }
+    #link-reality { top: 90%; left: 20%; }
     #link-obstacles { top: 76%; left: 47.0%; }
     #link-wayforward { top: 47%; left: 33%; }
 
     /* Overlay styles */
-    #overlay {
+    #overlay, #tracker-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -104,7 +104,7 @@
       z-index: 999;
     }
 
-    #overlay-content {
+    #overlay-content, #tracker-content {
       background-color: rgba(255, 255, 255, 0.95);
       padding: 40px;
       border-radius: 10px;
@@ -114,9 +114,11 @@
       overflow-y: auto;
       position: relative;
       font-size: 1.1rem;
+      width: 90%;
     }
 
-    #overlay-content button {
+    #overlay-content button,
+    #tracker-content button {
       position: absolute;
       top: 10px;
       right: 10px;
@@ -129,8 +131,21 @@
       transition: background-color 0.3s;
     }
 
-    #overlay-content button:hover {
+    #overlay-content button:hover,
+    #tracker-content button:hover {
       background-color: yellow;
+    }
+
+    #tracker-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .slider {
+      width: 100%;
+      margin: 10px 0;
     }
   </style>
 </head>
@@ -160,13 +175,33 @@
     </div>
   </section>
 
-  <!-- OVERLAY -->
+  <!-- MAIN OVERLAY -->
   <div id="overlay">
     <div id="overlay-content">
       <button onclick="closeOverlay()">Close</button>
       <div id="overlay-text"></div>
     </div>
   </div>
+
+  <!-- TRACKER OVERLAY -->
+  <div id="tracker-overlay">
+    <div id="tracker-content">
+      <button onclick="closeTracker()">Close</button>
+      <div class="textbox">
+        <h2>How did Sophie do this week?</h2>
+        <p><strong>Not interrupting</strong></p>
+        <input type="range" min="1" max="10" value="5" class="slider" id="interrupting">
+        <p id="value-interrupting">Score: 5</p>
+
+        <p><strong>Not taking control of all the tasks</strong></p>
+        <input type="range" min="1" max="10" value="5" class="slider" id="control">
+        <p id="value-control">Score: 5</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACKER BUTTON -->
+  <a href="#" onclick="openTracker()" id="tracker-button" class="overlay-link">Help me track progress</a>
 
   <!-- SCRIPT -->
   <script>
@@ -185,6 +220,27 @@
     function closeOverlay() {
       document.getElementById('overlay').style.display = 'none';
     }
+
+    function openTracker() {
+      document.getElementById('tracker-overlay').style.display = 'flex';
+    }
+
+    function closeTracker() {
+      document.getElementById('tracker-overlay').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const interrupting = document.getElementById('interrupting');
+      const control = document.getElementById('control');
+
+      interrupting.addEventListener('input', () => {
+        document.getElementById('value-interrupting').textContent = 'Score: ' + interrupting.value;
+      });
+
+      control.addEventListener('input', () => {
+        document.getElementById('value-control').textContent = 'Score: ' + control.value;
+      });
+    });
   </script>
 
 </body>
