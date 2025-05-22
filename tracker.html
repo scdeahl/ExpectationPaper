@@ -1,74 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tracker</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5;
-    }
-    .section {
-      padding: 60px 20px;
-      text-align: left;
-    }
-    .textbox {
-      max-width: 800px;
-      margin: 40px auto;
-      background-color: white;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .slider {
-      width: 100%;
-      margin: 10px 0;
-    }
-    button {
-      background-color: white;
-      border: 2px solid black;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: yellow;
-    }
-    input[type="text"], input[type="date"] {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0 16px 0;
-      box-sizing: border-box;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-  </style>
-</head>
-<body>
+<div class="textbox">
+  <button type="button" onclick="document.getElementById('overlay').style.display='none'" 
+          style="position: absolute; top: 10px; right: 100px; background-color: white; border: 2px solid black; padding: 5px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+    Close
+  </button>
 
-  <form action="https://formspree.io/f/mnqekpbl" method="POST" class="textbox">
-    <h2>How did Sophie do this week?</h2>
+  <h2>How did Sophie do this week?</h2>
 
-    <label for="name"><strong>Your name</strong></label>
-    <input type="text" name="name" id="name" required>
+  <form action="https://formspree.io/f/mnqekpbl" method="POST">
+    <div style="margin-bottom: 20px;">
+      <label for="name"><strong>Your name</strong></label><br />
+      <input type="text" name="name" id="name" required style="width: 100%; padding: 8px; margin-top: 4px;">
+    </div>
 
-    <label for="date"><strong>Date</strong></label>
-    <input type="date" name="date" id="date" required>
+    <div style="margin-bottom: 20px;">
+      <label for="date"><strong>Date</strong></label><br />
+      <input type="date" name="date" id="date" required style="width: 100%; padding: 8px; margin-top: 4px;">
+    </div>
 
-    <label><strong>Not interrupting</strong></label>
-    <input type="range" min="1" max="10" name="interrupting" value="5" class="slider" oninput="document.getElementById('value-interrupting').textContent = 'Score: ' + this.value;">
-    <p id="value-interrupting">Score: 5</p>
+    <div style="margin-bottom: 20px;">
+      <label><strong>Not interrupting</strong></label><br />
+      <input type="range" min="1" max="10" name="interrupting" value="5" class="slider"
+             oninput="document.getElementById('value-interrupting').textContent = 'Score: ' + this.value;">
+      <p id="value-interrupting">Score: 5</p>
+    </div>
 
-    <label><strong>Not taking control of all the tasks</strong></label>
-    <input type="range" min="1" max="10" name="control" value="5" class="slider" oninput="document.getElementById('value-control').textContent = 'Score: ' + this.value;">
-    <p id="value-control">Score: 5</p>
+    <div style="margin-bottom: 20px;">
+      <label><strong>Not taking control of all the tasks</strong></label><br />
+      <input type="range" min="1" max="10" name="control" value="5" class="slider"
+             oninput="document.getElementById('value-control').textContent = 'Score: ' + this.value;">
+      <p id="value-control">Score: 5</p>
+    </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" style="padding: 10px 20px; font-weight: bold;">Submit</button>
   </form>
-
-</body>
-</html>
+</div>
