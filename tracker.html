@@ -43,7 +43,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('tracker-form');
     form.addEventListener('submit', function (e) {
-      e.preventDefault();
+      e.preventDefault(); // prevent default form submission
 
       const formData = new FormData(form);
 
@@ -59,7 +59,7 @@
           form.style.display = 'none';
           document.getElementById('thank-you').style.display = 'block';
         } else {
-          alert('There was a problem sending the form. Please try again.');
+          alert('Form could not be sent. Check your Formspree setup.');
         }
       })
       .catch(error => {
