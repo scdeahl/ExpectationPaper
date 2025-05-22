@@ -235,6 +235,35 @@
       }, 200);
     });
   </script>
+<script>
+  document.addEventListener('click', function () {
+    setTimeout(() => {
+      const form = document.getElementById('tracker-form');
+      if (form && !form.dataset.bound) {
+        form.dataset.bound = true;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          fetch('https://formspree.io/f/mldbkwdv', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          })
+          .then(response => {
+            if (response.ok) {
+              form.style.display = 'none';
+              const thankYou = document.getElementById('thank-you');
+              if (thankYou) thankYou.style.display = 'block';
+            } else {
+              alert('Form could not be sent. Please check Formspree setup.');
+            }
+          })
+          .catch(() => alert('Network error. Please try again later.'));
+        });
+      }
+    }, 200);
+  });
+</script>
 
 </body>
 </html>
